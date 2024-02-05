@@ -525,6 +525,8 @@ void MainWindow::connectActions()
 	connect(m_UI->actionClearColor,					&QAction::triggered, this, [=]() {
 		clearSelectedEntitiesProperty( ccEntityAction::CLEAR_PROPERTY::COLORS );
 	});
+	connect(m_UI->actionRGBGaussianFilter, &QAction::triggered, this, &MainWindow::doActionRGBGaussianFilter);
+	connect(m_UI->actionRGBBilateralFilter, &QAction::triggered, this, &MainWindow::doActionRGBBilateralFilter);
 
 	//"Edit > Normals" menu
 	connect(m_UI->actionComputeNormals,				&QAction::triggered, this, &MainWindow::doActionComputeNormals);
@@ -3212,6 +3214,25 @@ void MainWindow::doActionSplitCloudUsingSF()
 
     refreshAll();
     updateUI();
+}
+
+
+void MainWindow::doActionRGBGaussianFilter()
+{
+	if (!ccEntityAction::rgbGaussianFilter(m_selectedEntities, this))
+		return;
+
+	refreshAll();
+	updateUI();
+}
+
+void MainWindow::doActionRGBBilateralFilter()
+{
+	if (!ccEntityAction::rgbBilateralFilter(m_selectedEntities, this))
+		return;
+
+	refreshAll();
+	updateUI();
 }
 
 void MainWindow::doActionSFGaussianFilter()
@@ -11128,6 +11149,8 @@ void MainWindow::enableUIItems(dbTreeSelectionInfo& selInfo)
 	m_UI->actionClearColor->setEnabled(atLeastOneColor);
 	m_UI->actionRGBToGreyScale->setEnabled(atLeastOneColor);
 	m_UI->actionEnhanceRGBWithIntensities->setEnabled(atLeastOneColor);
+	m_UI->actionRGBGaussianFilter->setEnabled(atLeastOneColor);
+	m_UI->actionRGBBilateralFilter->setEnabled(atLeastOneColor);
 	m_UI->actionColorFromScalarField->setEnabled(atLeastOneSF);
 	// == 1
 	bool exactlyOneEntity = (selInfo.selCount == 1);
