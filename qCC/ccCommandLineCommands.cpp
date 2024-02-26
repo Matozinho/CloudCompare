@@ -6141,7 +6141,7 @@ bool CommandFilter::process(ccCommandLineInterface& cmd)
 	while (!cmd.arguments().empty())
 	{
 		QString argument = cmd.arguments().front();
-		if(ccCommandLineInterface::IsCommand(argument,OPTION_SF))
+		if (ccCommandLineInterface::IsCommand(argument, OPTION_SF))
 		{
 			cmd.arguments().pop_front();
 			if (!applyToRGB)
@@ -6160,14 +6160,16 @@ bool CommandFilter::process(ccCommandLineInterface& cmd)
 		else if (ccCommandLineInterface::IsCommand(argument, OPTION_BILATERAL))
 		{
 			cmd.arguments().pop_front();
-			if (!gaussian) {
+			if (!gaussian)
+			{
 				bilateral = true;
 			}
 		}
 		else if (ccCommandLineInterface::IsCommand(argument, OPTION_GAUSSIAN))
 		{
 			cmd.arguments().pop_front();
-			if (!bilateral) {
+			if (!bilateral)
+			{
 				gaussian = true;
 			}
 		}
@@ -6196,28 +6198,11 @@ bool CommandFilter::process(ccCommandLineInterface& cmd)
 
 	if (applyToSF)
 	{
-
-		if (gaussian)
-		{
-			return ccEntityAction::sfGaussianFilter(selectedEntities, cmd.widgetParent());
-		}
-		if (bilateral)
-		{
-			return ccEntityAction::sfBilateralFilter(selectedEntities, cmd.widgetParent());
-		}
+		return ccEntityAction::sfGaussianFilter(selectedEntities, bilateral, cmd.widgetParent());
 	}
-
-	if (applyToRGB)
+	else if (applyToRGB)
 	{
-
-		if (gaussian)
-		{
-			return ccEntityAction::rgbGaussianFilter(selectedEntities, cmd.widgetParent());
-		}
-		if (bilateral)
-		{
-			return ccEntityAction::rgbBilateralFilter(selectedEntities, cmd.widgetParent());
-		}
+		return ccEntityAction::rgbGaussianFilter(selectedEntities, bilateral, cmd.widgetParent());
 	}
 	
 	return true;
