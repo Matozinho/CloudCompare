@@ -6,7 +6,7 @@
 	url = https://github.com/CloudCompare/CCCoreLib
 [submodule "plugins/core/Standard/qPoissonRecon/extern/PoissonRecon"]
 	path = plugins/core/Standard/qPoissonRecon/extern/PoissonRecon
-	url = https://github.com/cloudcompare/PoissonRecon
+	url = https://github.com/Matozinho/PoissonRecon
 [submodule "plugins/core/Standard/qMPlane"]
 	path = plugins/core/Standard/qMPlane
 	url = https://github.com/hvs-ait/mplane-plugin
