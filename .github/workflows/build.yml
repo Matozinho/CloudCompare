@@ -135,12 +135,6 @@ jobs:
       - name: Build
         run: cmake --build build --parallel
 
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: windows-executable
-          path: build/*
-
       - name: Install (macOs)
         if: matrix.config.os == 'macos-latest'
         run: sudo cmake --install build
@@ -148,6 +142,12 @@ jobs:
       - name: Install (Windows)
         if: matrix.config.os == 'windows-latest'
         run: cmake --install build
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-executable
+          path: build/*
 
   # ubuntu-build:
   #   name: Ubuntu ${{ matrix.compiler }} SCALAR_DOUBLE=${{ matrix.scalar_double }}
