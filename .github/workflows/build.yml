@@ -96,7 +96,7 @@ jobs:
           cmake \
             -B build \
             -G "${{ matrix.config.generator }}" \
-            -DCMAKE_INSTALL_PREFIX=./ \
+            -DCMAKE_INSTALL_PREFIX=./build \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_PREFIX_PATH="$CONDA_LIB_DIR" \
             -DCCCORELIB_SCALAR_DOUBLE=${{ matrix.scalar_double }} \
